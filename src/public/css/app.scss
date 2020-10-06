@@ -1,0 +1,79 @@
+//5 COLORS
+
+$colors: (
+    primario:   #249AEF,
+    segundario: #25F17A,
+    fondo:      #0f0f0f,
+    video:      #181818,
+    texto:      #ffffff,
+    sombra:     #00000080,
+
+    // ESCALA DE GRISES
+    dk01:       #181818,
+    dk02:       #262626,
+    dk03:       #363636,
+    lt01:       #f0f0f0,
+    lt02:       #c8c8c8,
+    lt03:       #a8a8a8,
+);
+
+//4 FUNCTIONS
+
+@function color($color-name) {
+    @return map-get($colors, $color-name);
+}
+
+@mixin displayFlex($justify,$align,$direction) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+}
+
+@mixin responsivemin ($value) {
+    @media (min-width: $value){
+        @content;
+    }
+}
+
+@mixin responsivemax ($value) {
+    @media (max-width: $value){
+        @content;
+    }
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    appearance: none;
+    list-style: none;
+    text-decoration: none;
+    color: color(texto);
+    font-family: 'Montserrat',Arial, Helvetica, sans-serif;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    background: color(fondo);
+}
+
+body {
+    padding: 2em;
+    @include displayFlex(center,center,column);
+
+    #video-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-auto-rows: 300px;
+        background: color(video);
+    }
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
